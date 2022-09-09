@@ -1,14 +1,13 @@
 package GantyRex.Ganty.Customers_Info.Guarantors;
 
-import GantyRex.Ganty.Customers_Info.Customers.Customers;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
-
-import static javax.persistence.GenerationType.SEQUENCE;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Getter
 @Setter
@@ -18,8 +17,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class Guarantors {
 
     @Id
-    @SequenceGenerator(name = "guarantors_sequence", sequenceName = "guarantors_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = SEQUENCE, generator = "guarantors_sequence")
+    @GeneratedValue
     private Long Id;
     private String firstname;
     private String surname;
@@ -29,22 +27,4 @@ public class Guarantors {
     private String LGA;
     private String occupation;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "customers_id",
-            nullable = false
-    )
-    private Customers customers;
-
-    public Guarantors(String firstname, String surname,
-                      Long phoneNumber, String address,
-                      String STATE_OF_ORIGIN, String LGA, String occupation) {
-        this.firstname = firstname;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.Address = address;
-        this.STATE_OF_ORIGIN = STATE_OF_ORIGIN;
-        this.LGA = LGA;
-        this.occupation = occupation;
-    }
 }

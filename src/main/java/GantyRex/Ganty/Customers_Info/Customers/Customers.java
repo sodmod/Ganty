@@ -1,13 +1,10 @@
 package GantyRex.Ganty.Customers_Info.Customers;
 
 import GantyRex.Ganty.Customers_Info.Guarantors.Guarantors;
-import GantyRex.Ganty.Customers_Info.Next_Of_Kin.Next_Of_Kin;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
-
-import static javax.persistence.GenerationType.SEQUENCE;
+import java.util.List;
 
 @Setter
 @Getter
@@ -22,7 +19,8 @@ public class Customers {
             name = "customers_sequence",
             sequenceName = "customers_sequence",
             allocationSize = 1)
-    @GeneratedValue(strategy = SEQUENCE, generator = "customers_sequence")
+//    @GeneratedValue(strategy = SEQUENCE, generator = "customers_sequence")
+    @GeneratedValue
     private Long id;
     private String surname;
     private String firstname;
@@ -32,26 +30,18 @@ public class Customers {
     private String STATE_OF_ORIGIN;
     private String LCGA;
     private String Occupation;
-    @OneToMany
+    @OneToMany(targetEntity = Guarantors.class, cascade = CascadeType.ALL)
     @JoinColumn(
             name = "guarantors_Id",
             nullable = false
     )
-    private Set<Guarantors> guarantors;
-
-    @OneToOne
-    @JoinColumn(
-            name = "nextOfKin_Id",
-            nullable = false
-    )
-    private Next_Of_Kin nextOfKin;
-//    private String Age;
+    private List<Guarantors> guarantors;
 
     public Customers(String surname, String firstname,
                      String email, String phoneNumber,
                      String Address, String STATE_OF_ORIGIN,
                      String LCGA, String Occupation,
-                     Set<Guarantors> guarantors, Next_Of_Kin nextOfKin){
+                     List<Guarantors> guarantors){
         this.surname = surname;
         this.firstname = firstname;
         this.email = email;
@@ -61,13 +51,7 @@ public class Customers {
         this.LCGA = LCGA;
         this.Occupation = Occupation;
         this.guarantors = guarantors;
-        this.nextOfKin = nextOfKin;
     }
 
-//    @OneToOne
-//    @JoinColumn(
-//            name = "staffs_id",
-//            nullable = false
-//    )
-//    private Staffs staffs;
+
 }

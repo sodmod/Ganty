@@ -24,14 +24,16 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().antMatchers("/api/addStaffs/admin").permitAll();
+                .authorizeRequests()
+                .antMatchers("/administrator/staffs/admin").permitAll()
+                .antMatchers("/customer/add").permitAll();//.anyRequest();
         http
                 .csrf().disable()
                 .authorizeRequests()
 
                 .antMatchers("administrator/staffs/hod").hasRole(MANAGER.name())
                 .antMatchers("administrator/staffs/staffs").hasAnyRole(HOD.name())
-                .antMatchers("customer").hasAnyRole(STAFF.name(), HOD.name())
+//                .antMatchers("customer").hasAnyRole(STAFF.name(), HOD.name())
                 .anyRequest()
                 .authenticated()
                 .and()
