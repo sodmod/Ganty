@@ -1,12 +1,8 @@
 package GantyRex.Ganty.Customers_Info;
 
 import GantyRex.Ganty.Customers_Info.Customers.CustomerService;
-import GantyRex.Ganty.Customers_Info.Customers.Customers;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -16,7 +12,7 @@ public class CustomersRestController {
 
     @PostMapping(path = "add")
     @ResponseBody
-    public String customers(Customers customers){
+    public String customers(@RequestBody CustomerRequest customers){
         return customerService.addCustomers(customers);
 //        return "scu";
     }

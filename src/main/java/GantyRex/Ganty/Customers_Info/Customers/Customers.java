@@ -6,10 +6,13 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Setter
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @Entity
 public class Customers {
@@ -19,8 +22,7 @@ public class Customers {
             name = "customers_sequence",
             sequenceName = "customers_sequence",
             allocationSize = 1)
-//    @GeneratedValue(strategy = SEQUENCE, generator = "customers_sequence")
-    @GeneratedValue
+    @GeneratedValue(strategy = SEQUENCE, generator = "customers_sequence")
     private Long id;
     private String surname;
     private String firstname;
@@ -32,7 +34,7 @@ public class Customers {
     private String Occupation;
     @OneToMany(targetEntity = Guarantors.class, cascade = CascadeType.ALL)
     @JoinColumn(
-            name = "guarantors_Id",
+            name = "customers_Id",
             nullable = false
     )
     private List<Guarantors> guarantors;

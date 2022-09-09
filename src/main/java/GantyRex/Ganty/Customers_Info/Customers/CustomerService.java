@@ -1,5 +1,6 @@
 package GantyRex.Ganty.Customers_Info.Customers;
 
+import GantyRex.Ganty.Customers_Info.CustomerRequest;
 import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
@@ -10,10 +11,12 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
 //    private final GuarantorService guarantorService;
 
-    public String addCustomers(@NotNull Customers customers){
-        signCustomers(
-                new Customers(customers.getSurname(), customers.getFirstname(), customers.getEmail(), customers.getPhoneNumber(), customers.getAddress(), customers.getSTATE_OF_ORIGIN(), customers.getLCGA(), customers.getOccupation(), customers.getGuarantors())
-        );
+    public String addCustomers(@NotNull CustomerRequest customers){
+
+        signCustomers(customers.getCustomers());
+//        signCustomers(
+//                new Customers(customers.getSurname(), customers.getFirstname(), customers.getEmail(), customers.getPhoneNumber(), customers.getAddress(), customers.getSTATE_OF_ORIGIN(), customers.getLCGA(), customers.getOccupation(), customers.getGuarantors())
+//        );
 
        return "success";
     }
