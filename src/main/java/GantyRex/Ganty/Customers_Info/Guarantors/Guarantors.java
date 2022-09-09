@@ -8,6 +8,9 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Getter
 @Setter
@@ -17,7 +20,11 @@ import javax.persistence.Id;
 public class Guarantors {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(
+            name = "guarantors_sequence",
+            sequenceName = "guarantors_sequence",
+            allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "guarantors_sequence")
     private Long Id;
     private String firstname;
     private String surname;
